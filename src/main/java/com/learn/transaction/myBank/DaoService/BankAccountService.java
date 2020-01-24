@@ -31,7 +31,7 @@ public class BankAccountService  {
     }
 
     // MANDATORY: Transaction must be created before.
-    @Transactional(propagation = Propagation.MANDATORY )
+    @Transactional(propagation = Propagation.NEVER )
     public void addAmount(Long id, double amount) throws BankTransactionException{
         System.err.println("Add Amount Started");
         BankAccount account = this.findById(id);
@@ -54,8 +54,9 @@ public class BankAccountService  {
     }
 
     // Do not catch BankTransactionException in this method.
-  @Transactional(propagation = Propagation.REQUIRES_NEW,
-            rollbackFor = BankTransactionException.class)
+  /*@Transactional(propagation = Propagation.REQUIRES_NEW,
+            rollbackFor = BankTransactionException.class)*/
+  @Transactional
     public void sendMoney(Long fromAccountId, Long toAccountId, double amount) throws BankTransactionException{
 
         addAmount(toAccountId, amount);

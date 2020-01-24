@@ -1,6 +1,7 @@
 package com.learn.transaction.myBank.controller;
 
 import com.learn.transaction.myBank.DaoService.BankAccountService;
+import com.learn.transaction.myBank.DaoService.BankRequestService;
 import com.learn.transaction.myBank.entity.BankAccount;
 import com.learn.transaction.myBank.exception.BankTransactionException;
 import org.slf4j.Logger;
@@ -18,6 +19,9 @@ import java.util.List;
 public class BankController {
     @Autowired
     private BankAccountService bankAccountService;
+
+    @Autowired
+    private BankRequestService bankRequestService;
     private final static Logger logger = LoggerFactory.getLogger(BankController.class);
 
     @GetMapping("/")
@@ -37,8 +41,8 @@ public class BankController {
     public String viewSendMoneyPage(@PathVariable Long from, @PathVariable Long to, @PathVariable double amount) {
         logger.info("Send Money From: " + from + " to: "+ to + " Amount: " + amount);
         try {
+            //bankRequestService.sendMoney(from, to, amount);
             bankAccountService.sendMoney(from, to, amount);
-            //bankAccountService.sendMoney(from, to, -amount);
 
         } catch (BankTransactionException e) {
             new BankTransactionException("errorMessage Error: " + e.getMessage());
