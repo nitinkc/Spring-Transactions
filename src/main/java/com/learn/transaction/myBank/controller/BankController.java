@@ -1,16 +1,15 @@
 package com.learn.transaction.myBank.controller;
 
-import com.learn.transaction.myBank.BankAccountService;
+import com.learn.transaction.myBank.DaoService.BankAccountService;
 import com.learn.transaction.myBank.entity.BankAccount;
 import com.learn.transaction.myBank.exception.BankTransactionException;
-import com.learn.transaction.myBank.model.BankAccountModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by nitin on Thursday, January/23/2020 at 11:36 PM
@@ -19,27 +18,32 @@ import java.util.logging.Logger;
 public class BankController {
     @Autowired
     private BankAccountService bankAccountService;
+    private final static Logger logger = LoggerFactory.getLogger(BankController.class);
 
     @GetMapping("/")
     public String HelloWorld(){
-        return "Hello!! The Banking System is UP and Running";
+        String str = "Hello!! The Banking System is UP and Running";
+        logger.info(str);
+        return str ;
     }
     @GetMapping(value = "/allAccounts")
     public List<BankAccount> showBankAccounts(Model model) {
         List<BankAccount> list = bankAccountService.listBankAccountInfo();
+        logger.info("Bank Accounts " + list.toString() + " in a seat...");
         return list;
-
     }
 
     @GetMapping(value = "/sendMoney/{from}/{to}/{amount}")
     public String viewSendMoneyPage(@PathVariable Long from, @PathVariable Long to, @PathVariable double amount) {
-        System.out.println("Send Money From: " + from + " to: "+ to + " Amount: " + amount);
+        logger.info("Send Money From: " + from + " to: "+ to + " Amount: " + amount);
         try {
             bankAccountService.sendMoney(from, to, amount);
+            //bankAccountService.sendMoney(from, to, -amount);
+
         } catch (BankTransactionException e) {
             new BankTransactionException("errorMessage Error: " + e.getMessage());
-            return "/sendMoneyPage";
+            return e.getMessage();
         }
-        return "sendMoneyPage";
+        return "Send Money From: " + from + " to: "+ to + " Amount: " + amount;
     }
 }

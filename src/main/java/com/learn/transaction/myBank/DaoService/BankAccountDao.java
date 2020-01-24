@@ -1,4 +1,4 @@
-package com.learn.transaction.myBank;
+package com.learn.transaction.myBank.DaoService;
 
 import com.learn.transaction.myBank.entity.BankAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
