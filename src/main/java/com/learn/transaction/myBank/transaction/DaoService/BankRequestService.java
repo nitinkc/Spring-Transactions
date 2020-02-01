@@ -1,6 +1,7 @@
-package com.learn.transaction.myBank.DaoService;
+package com.learn.transaction.myBank.transaction.DaoService;
 
 import com.learn.transaction.myBank.exception.BankTransactionException;
+import com.learn.transaction.myBank.transaction.DaoService.MoneyTransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
