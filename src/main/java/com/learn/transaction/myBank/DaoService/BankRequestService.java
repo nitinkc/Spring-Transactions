@@ -13,11 +13,27 @@ import org.springframework.transaction.annotation.Transactional;
 public class BankRequestService {
 
     @Autowired
-    AddAmountService addAmountService;
+    MoneyTransferService moneyTransferService;
 
-    public void sendMoney(Long fromAccountId, Long toAccountId, double amount) throws BankTransactionException {
-        addAmountService.addAmount(toAccountId, amount);
+    // Do not catch BankTransactionException in this method.
+  /*@Transactional(propagation = Propagation.REQUIRES_NEW,
+            rollbackFor = BankTransactionException.class)*/
+    @Transactional
+    public void sendMoney(Long fromAccountId, Long toAccountId, double amount) throws BankTransactionException{
+
+        moneyTransferService.addAmount(toAccountId, amount);
         //System.out.println(10/0);
-        addAmountService.addAmount(fromAccountId, -amount);
+        moneyTransferService.removeAmount(fromAccountId, -amount);
+    }
+
+    @Transactional
+    public void sendMoneytoMultipleAccounts(Long fromAccountId, Long toAccountId1, Long toAccountId2, double amount) {
+        moneyTransferService.addAmount(toAccountId1, amount);
+        moneyTransferService.removeAmount(fromAccountId, amount);
+
+        moneyTransferService.addAmount(toAccountId2, amount);
+        moneyTransferService.removeAmount(fromAccountId, amount);
+
+
     }
 }

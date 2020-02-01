@@ -18,10 +18,9 @@ import java.util.List;
 @RestController
 public class BankController {
     @Autowired
-    private BankAccountService bankAccountService;
-
-    @Autowired
     private BankRequestService bankRequestService;
+    @Autowired
+    private BankAccountService bankAccountService;
     private final static Logger logger = LoggerFactory.getLogger(BankController.class);
 
     @GetMapping("/")
@@ -41,13 +40,24 @@ public class BankController {
     public String viewSendMoneyPage(@PathVariable Long from, @PathVariable Long to, @PathVariable double amount) {
         logger.info("Send Money From: " + from + " to: "+ to + " Amount: " + amount);
         try {
-            //bankRequestService.sendMoney(from, to, amount);
-            bankAccountService.sendMoney(from, to, amount);
+            bankRequestService.sendMoney(from, to, amount);
 
         } catch (BankTransactionException e) {
             new BankTransactionException("errorMessage Error: " + e.getMessage());
             return e.getMessage();
         }
         return "Send Money From: " + from + " to: "+ to + " Amount: " + amount;
+    }
+
+    @GetMapping(value = "/sendMoney/from/{from}/to/{to1}/and/{to2}/{amount}")
+    public String viewSendMoneyPage(@PathVariable Long from, @PathVariable Long to1, @PathVariable Long to2, @PathVariable double amount) {
+        logger.info("Send Money From: " + from + " to: "+ to1 + " and "+ to2 + " a total amount of: " + amount);
+        try {
+            bankRequestService.sendMoneytoMultipleAccounts(from, to1,to2, amount);
+        } catch (BankTransactionException e) {
+            new BankTransactionException("errorMessage Error: " + e.getMessage());
+            return e.getMessage();
+        }
+        return "Send Money From: " + from + " to: "+ to1 + " and "+ to2 + " a total amount of: " + amount;
     }
 }
