@@ -3,6 +3,7 @@ package com.learn.transaction.myBank.DaoService;
 import com.learn.transaction.myBank.exception.BankTransactionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -16,11 +17,9 @@ public class BankRequestService {
     MoneyTransferService moneyTransferService;
 
     // Do not catch BankTransactionException in this method.
-  /*@Transactional(propagation = Propagation.REQUIRES_NEW,
-            rollbackFor = BankTransactionException.class)*/
-    @Transactional
+  @Transactional(propagation = Propagation.REQUIRED,
+            rollbackFor = BankTransactionException.class)
     public void sendMoney(Long fromAccountId, Long toAccountId, double amount) throws BankTransactionException{
-
         moneyTransferService.addAmount(toAccountId, amount);
         //System.out.println(10/0);
         moneyTransferService.removeAmount(fromAccountId, -amount);
@@ -33,7 +32,5 @@ public class BankRequestService {
 
         moneyTransferService.addAmount(toAccountId2, amount);
         moneyTransferService.removeAmount(fromAccountId, amount);
-
-
     }
 }

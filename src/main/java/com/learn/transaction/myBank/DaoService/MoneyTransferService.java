@@ -15,13 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class MoneyTransferService {
 
     BankAccountService bankAccountService;
-    // MANDATORY: Transaction must be created before.
+    //MANDATORY: Transaction must be created before.
     @Transactional(propagation = Propagation.MANDATORY )
     public void addAmount(Long id, double amount) throws BankTransactionException {
         log.info("Add Amount Started");
         BankAccount account = bankAccountService.findById(id);
 
         if (account == null) {
+            log.error("bankAccountService.findById(id) returns null for id : " + id);
             throw new BankTransactionException("Account not found " + id);
         }
         double newBalance = account.getBalance() + amount;
