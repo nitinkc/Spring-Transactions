@@ -1,0 +1,49 @@
+entity Student {
+    enrollmentNum Long required,
+	firstName String,
+	lastName String,
+	gender String,
+}
+
+entity Department {
+	studentEnrolled Long required
+	departmentName DEPARTMENTNAME required
+}
+
+entity Hostel { 
+	studentEnrolled Long required
+	hostelName HOSTELNAME,
+	gender Long,
+}
+
+entity Society {
+	societyName SOCIETY,
+	studentEnrolled Long required
+}
+
+enum DEPARTMENTNAME {
+    COMPUTERSCIENCE, ELECTRICAL, MECHANICAL, CIVIL
+}
+
+enum HOSTELNAME {
+    GANDHI, TERESA, NONE
+}
+enum SOCIETY {
+    DRAMA, SPORTS, DEBATE, NONE
+}
+
+relationship OneToOne {
+	Student{enrollmentNum} to Department,
+    Student{enrollmentNum} to Hostel
+
+}
+
+relationship OneToMany {
+	Department{studentEnrolled} to Student{enrollmentNum}
+}
+
+relationship ManyToMany {
+	Student{enrollmentNum} to Society{studentEnrolled},
+    Society{studentEnrolled} to Student{enrollmentNum}
+
+}
