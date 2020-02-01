@@ -41,7 +41,6 @@ public class BankController {
         logger.info("Send Money From: " + from + " to: "+ to + " Amount: " + amount);
         try {
             bankRequestService.sendMoney(from, to, amount);
-
         } catch (BankTransactionException e) {
             new BankTransactionException("errorMessage Error: " + e.getMessage());
             return e.getMessage();

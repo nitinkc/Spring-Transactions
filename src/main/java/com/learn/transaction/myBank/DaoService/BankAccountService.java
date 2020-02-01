@@ -29,6 +29,7 @@ public class BankAccountService  {
     }
 
     public BankAccount findById(Long id) {
+        log.info("Inside BankAccount findById(Long id)");
         Optional<BankAccount> bankAccountOptional = bankAccountDao.findById(id);
         if (!bankAccountOptional.isPresent()){
             throw new BankAccountNotFoundException("Account No : " + id);

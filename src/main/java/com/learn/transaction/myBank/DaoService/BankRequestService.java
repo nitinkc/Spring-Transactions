@@ -10,9 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by nichaurasia on Friday, January/24/2020 at 1:56 PM
  */
 @Service
-@Transactional
 public class BankRequestService {
-
     @Autowired
     MoneyTransferService moneyTransferService;
 
@@ -22,7 +20,7 @@ public class BankRequestService {
     public void sendMoney(Long fromAccountId, Long toAccountId, double amount) throws BankTransactionException{
         moneyTransferService.addAmount(toAccountId, amount);
         //System.out.println(10/0);
-        moneyTransferService.removeAmount(fromAccountId, -amount);
+        moneyTransferService.removeAmount(fromAccountId, amount);
     }
 
     @Transactional
