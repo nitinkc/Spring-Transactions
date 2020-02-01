@@ -1,7 +1,6 @@
 package com.learn.transaction.myBank.controller;
 
 import com.learn.transaction.myBank.DaoService.BankAccountService;
-import com.learn.transaction.myBank.DaoService.BankRequestService;
 import com.learn.transaction.myBank.entity.BankAccount;
 import com.learn.transaction.myBank.exception.BankTransactionException;
 import org.slf4j.Logger;
@@ -20,8 +19,6 @@ public class BankController {
     @Autowired
     private BankAccountService bankAccountService;
 
-    @Autowired
-    private BankRequestService bankRequestService;
     private final static Logger logger = LoggerFactory.getLogger(BankController.class);
 
     @GetMapping("/")
