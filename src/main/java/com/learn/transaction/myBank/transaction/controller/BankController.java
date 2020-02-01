@@ -1,13 +1,11 @@
 package com.learn.transaction.myBank.transaction.controller;
 
 import com.learn.transaction.myBank.transaction.DaoService.BankAccountService;
-import com.learn.transaction.myBank.entity.BankAccount;
 import com.learn.transaction.myBank.exception.BankTransactionException;
 import com.learn.transaction.myBank.transaction.DaoService.BankRequestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,19 +21,6 @@ public class BankController {
     private BankRequestService bankRequestService;
 
     private final static Logger logger = LoggerFactory.getLogger(BankController.class);
-
-    @GetMapping("/")
-    public String HelloWorld(){
-        String str = "Hello!! The Banking System is UP and Running";
-        logger.info(str);
-        return str ;
-    }
-    @GetMapping(value = "/allAccounts")
-    public List<BankAccount> showBankAccounts(Model model) {
-        List<BankAccount> list = bankAccountService.listBankAccountInfo();
-        logger.info("Bank Accounts " + list.toString() + " in a seat...");
-        return list;
-    }
 
     @GetMapping(value = "/sendMoney/{from}/{to}/{amount}")
     public String viewSendMoneyPage(@PathVariable Long from, @PathVariable Long to, @PathVariable double amount) {

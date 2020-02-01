@@ -16,7 +16,7 @@ public class BankRequestService {
     MoneyTransferService moneyTransferService;
 
     // Do not catch BankTransactionException in this method.
-  @Transactional(propagation = Propagation.REQUIRED,
+    @Transactional(propagation = Propagation.REQUIRED,
             rollbackFor = BankTransactionException.class)
     public void sendMoney(Long fromAccountId, Long toAccountId, double amount) throws BankTransactionException{
         moneyTransferService.addAmount(toAccountId, amount);
@@ -29,6 +29,7 @@ public class BankRequestService {
         moneyTransferService.addAmount(toAccountId1, amount);
         moneyTransferService.removeAmount(fromAccountId, amount);
 
+        System.out.println(10/0);
         moneyTransferService.addAmount(toAccountId2, amount);
         moneyTransferService.removeAmount(fromAccountId, amount);
     }

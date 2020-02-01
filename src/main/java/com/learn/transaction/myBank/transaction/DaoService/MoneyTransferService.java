@@ -3,6 +3,7 @@ package com.learn.transaction.myBank.transaction.DaoService;
 import com.learn.transaction.myBank.entity.BankAccount;
 import com.learn.transaction.myBank.exception.BankTransactionException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,12 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class MoneyTransferService {
 
+    @Autowired
     BankAccountService bankAccountService;
     //MANDATORY: Transaction must be created before.
-    @Transactional(propagation = Propagation.MANDATORY )
+    //@Transactional(propagation = Propagation.MANDATORY )
     public void addAmount(Long id, double amount) throws BankTransactionException {
         log.info("Add Amount Started");
-        BankAccount account = bankAccountService.findById(id);
+        BankAccount account = bankAccountService.findAccountNumber(id);
 
         if (account == null) {
             log.error("bankAccountService.findById(id) returns null for id : " + id);
@@ -39,7 +41,7 @@ public class MoneyTransferService {
         //bankAccountDao.save(account);
     }
 
-    @Transactional
+    //@Transactional
     public void removeAmount(Long fromAccountId, double amount) {
         addAmount(fromAccountId,-amount);
     }
