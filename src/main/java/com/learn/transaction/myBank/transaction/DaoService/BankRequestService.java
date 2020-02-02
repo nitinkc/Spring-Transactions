@@ -29,7 +29,7 @@ public class BankRequestService {
         moneyTransferService.addAmount(toAccountId1, amount);
         moneyTransferService.removeAmount(fromAccountId, amount);
 
-        System.out.println(10/0);
+        //System.out.println(10/0);
         moneyTransferService.addAmount(toAccountId2, amount);
         moneyTransferService.removeAmount(fromAccountId, amount);
     }

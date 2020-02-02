@@ -3,10 +3,30 @@
 <head>
     <title>Test</title>
 
+    <style>
+        th, td {
+            padding: 5px;
+        }
+    </style>
+
 </head>
 
 <body>
 
 <h2>Accounts</h2>
 
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Balance</th>
+    </tr>
+    <!--/*@thymesVar id="accountInfo" type="BankAccount"*/-->
+    <tr th:each="accountInfo : ${accountInfos}">
+        <td th:utext="${accountInfo.id}">..</td>
+        <td th:utext="${accountInfo.fullName}">..</td>
+        <td th:utext="${accountInfo.balance}">..</td>
+    </tr>
+
+</table>
 </body>

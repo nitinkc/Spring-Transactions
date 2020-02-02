@@ -25,17 +25,16 @@ public class BankCommonController {
     private final static Logger logger = LoggerFactory.getLogger(BankCommonController.class);
 
     @GetMapping("/")
-    public String HelloWorld(Model model){
+    public String HelloWorld(){
         String str = "Hello!! The Banking System is UP and Running";
         logger.info(str);
-        model.addAttribute("test",str);
-        return "test" ;
+        return str ;
     }
     @GetMapping(value = "/allAccounts")
-    public String showBankAccounts(Model model) {
+    public List<BankAccount> showBankAccounts(Model model) {
         List<BankAccount> list = bankAccountService.listBankAccountInfo();
         logger.info("Bank Accounts " + list.toString() + " in a seat...");
         model.addAttribute("accountInfos",list);
-        return "test";
+        return list;
     }
 }
