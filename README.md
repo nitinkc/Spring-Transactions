@@ -18,6 +18,7 @@ In the above Example, the transaction is propagated in the same order as mention
 # Propagation
 
 [Tx Pitfalls](https://medium.com/@safa_ertekin/common-transaction-propagation-pitfalls-in-spring-framework-2378ee7d6521)
+
 [Tx Propagation](https://www.javainuse.com/spring/boot-transaction-propagation)
 
 Let's consider a transaction : Student Service -> Department Service
@@ -43,8 +44,23 @@ If Student Service has a Transactional Annotation, and Department Service has
 ```
 Then there should be an exception. In the Replicated Example, appears that the default save method of JPA creates an internal Tx which is why it works.
 
+REQUIRES_NEW : Always executes in a new transaction. If there is any existing transaction it gets suspended.
+Irrespective of the Calling method, the new Transaction is created. If the calling method has a Tx, then its suspended and gets resumed after the called Tx is completed.
 
 
+```java
+20-02-02 Sun 01:17:18.333 DEBUG JpaTransactionManager Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+20-02-02 Sun 01:17:18.371 DEBUG JpaTransactionManager Committing JPA transaction on EntityManager [SessionImpl(1422485332<open>)]
+
+20-02-02 Sun 01:17:18.381 DEBUG JpaTransactionManager Creating new transaction with name [com.learn.transaction.myAdmissionService.daoService.DepartmentService.saveDepartment]: PROPAGATION_REQUIRES_NEW,ISOLATION_DEFAULT
+20-02-02 Sun 01:17:18.396 DEBUG JpaTransactionManager Committing JPA transaction on EntityManager [SessionImpl(1422485332<open>)]
+
+20-02-02 Sun 01:17:18.398 DEBUG JpaTransactionManager Creating new transaction with name [com.learn.transaction.myAdmissionService.daoService.HostelService.saveHostel]: PROPAGATION_REQUIRES_NEW,ISOLATION_DEFAULT
+20-02-02 Sun 01:17:18.414 DEBUG JpaTransactionManager Committing JPA transaction on EntityManager [SessionImpl(1422485332<open>)]
+
+20-02-02 Sun 01:17:18.417 DEBUG JpaTransactionManager Creating new transaction with name [com.learn.transaction.myAdmissionService.daoService.SocietyService.saveSociety]: PROPAGATION_REQUIRES_NEW,ISOLATION_DEFAULT
+20-02-02 Sun 01:17:18.432 DEBUG JpaTransactionManager Committing JPA transaction on EntityManager [SessionImpl(1422485332<open>)]
+```
 # Isolation - For Concurrent Transactions
 
 The default transaction isolation taken is that of the underlying database.
