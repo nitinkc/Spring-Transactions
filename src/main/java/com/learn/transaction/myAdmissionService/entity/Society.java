@@ -20,7 +20,7 @@ public class Society {
 
     @Id
     private Long studentEnrolled;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "society")
     private SOCIETY_NAME society_name;
 
