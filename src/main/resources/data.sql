@@ -1,4 +1,3 @@
--- Create table
 DROP TABLE IF EXISTS BANK_ACCOUNT;
 
 create table BANK_ACCOUNT
