@@ -104,7 +104,27 @@ This is achieved via the RollbackFor annotation.
 A checked exception is a type of exception that must be either caught or declared in the method in which it is thrown
 
 Example: With Admission Service, if an invalid Hostel Exception is thrown, then the Tx prior to Hostel Tx (Student and Department) would be committed successfully, which is not desirable.
-The requirement here is to have Student, Department, Hosteladn Society Txs to be completed in its entirety or not committed at all.
+The requirement here is to have Student, Department, Hostel and Society Txs to be completed in its entirety or not committed at all.
 
 
+```java
+@Transactional(rollbackFor = InvalidHostelException.class)
+   public void addStudent(Student student, Department department, Hostel hostel, Society society)
+                        throws InvalidHostelException {
+}
+
+Logs:
+
+20-02-02 Sun 02:34:37.324 DEBUG JpaTransactionManager Found thread-bound EntityManager [SessionImpl(1417143744<open>)] for JPA transaction
+20-02-02 Sun 02:34:37.324 DEBUG JpaTransactionManager Participating in existing transaction
+Hibernate: select department0_.student_enrolled as student_1_1_0_, department0_.dept_name as dept_nam2_1_0_ from department department0_ where department0_.student_enrolled=?
+20-02-02 Sun 02:34:37.327 DEBUG JpaTransactionManager Initiating transaction rollback
+20-02-02 Sun 02:34:37.327 DEBUG JpaTransactionManager Rolling back JPA transaction on EntityManager [SessionImpl(1417143744<open>)]
+20-02-02 Sun 02:34:37.332 DEBUG JpaTransactionManager Not closing pre-bound JPA EntityManager after transaction
+20-02-02 Sun 02:34:37.340 DEBUG OpenEntityManagerInViewInterceptor Closing JPA EntityManager in OpenEntityManagerInViewInterceptor
+20-02-02 Sun 02:34:37.341 DEBUG DispatcherServlet Failed to complete request: com.learn.transaction.myAdmissionService.exception.InvalidHostelException: Boys Hostel cannot be assigned to Female Student
+20-02-02 Sun 02:34:37.355 ERROR [dispatcherServlet] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is com.learn.transaction.myAdmissionService.exception.InvalidHostelException: Boys Hostel cannot be assigned to Female Student] with root cause
+com.learn.transaction.myAdmissionService.exception.InvalidHostelException: Boys Hostel cannot be assigned to Female Student
+	at com.learn.transaction.myAdmissionService.AdmissionService.addStudent(AdmissionService.java:42)
+```
 

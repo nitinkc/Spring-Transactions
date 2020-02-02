@@ -31,6 +31,7 @@ public class AdmissionService {
     @Autowired
     SocietyService societyService;
 
+    @Transactional(rollbackFor = InvalidHostelException.class)
     public void addStudent(Student student, Department department, Hostel hostel, Society society)
                         throws InvalidHostelException {
         log.info("Add Student Invoked");
