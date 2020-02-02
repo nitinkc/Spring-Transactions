@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by nitin on Saturday, February/01/2020 at 3:38 PM
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(propagation = Propagation.SUPPORTS)
 public class DepartmentService {
     @Autowired
     private DepartmentRepository departmentRepository;
