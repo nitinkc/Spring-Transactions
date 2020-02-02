@@ -23,11 +23,7 @@ In the above Example, the transaction is propagated in the same order as mention
 
 Let's consider a transaction : Student Service -> Department Service
 
-REQUIRED (Default Transaction Propagation) - Always executes in a transaction. If there is any existing transaction it uses it. 
-If none exists then only a new one is created
-
-If Student Service does not have a Transactional Annotation, and Department Service has REQUIRED, then a new Tx will be created.
-
+REQUIRED (Default Transaction Propagation)
 
 MANDATORY - Always executes in a transaction. If there is any existing transaction it is used. If there is no existing transaction it will throw an exception.
 
