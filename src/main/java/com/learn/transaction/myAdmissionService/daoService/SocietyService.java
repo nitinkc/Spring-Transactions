@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by nitin on Saturday, February/01/2020 at 3:39 PM
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRES_NEW)
+@Transactional(propagation = Propagation.REQUIRED)
 public class SocietyService {
     @Autowired
     private SocietyRepository societyRepository;
