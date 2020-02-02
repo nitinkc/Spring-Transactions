@@ -20,7 +20,7 @@ public class AdmissionRunner {
 
         Student student1 = new Student(564L,"Kirti","Chaurasia","Female");
         Department department1 = new Department(564L, DEPARTMENT_NAME.ELECTRICAL);
-        Hostel hostel1 = new Hostel(564L, HOSTEL_NAME.TERESA);
+        Hostel hostel1 = new Hostel(564L, HOSTEL_NAME.GANDHI);
         Society society1 = new Society(564L,SOCIETY_NAME.SPORTS);
 
         admissionService.addStudent(student,department,hostel,society);

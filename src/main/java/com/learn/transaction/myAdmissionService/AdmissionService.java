@@ -8,6 +8,8 @@ import com.learn.transaction.myAdmissionService.entity.Department;
 import com.learn.transaction.myAdmissionService.entity.Hostel;
 import com.learn.transaction.myAdmissionService.entity.Society;
 import com.learn.transaction.myAdmissionService.entity.Student;
+import com.learn.transaction.myAdmissionService.exception.InvalidHostelException;
+import com.learn.transaction.myBank.exception.BankAccountNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,11 +31,15 @@ public class AdmissionService {
     @Autowired
     SocietyService societyService;
 
-    public void addStudent(Student student, Department department, Hostel hostel, Society society){
+    public void addStudent(Student student, Department department, Hostel hostel, Society society)
+                        throws InvalidHostelException {
         log.info("Add Student Invoked");
         studentService.saveStudent(student);
         //System.out.println(10/0);
         departmentService.saveDepartment(department);
+        if(student.getGender().equalsIgnoreCase("Female") && hostel.getHostel_name().name().equalsIgnoreCase("Gandhi")){
+            throw new InvalidHostelException("Boys Hostel cannot be assigned to Female Student");
+        }
         hostelService.saveHostel(hostel);
         societyService.saveSociety(society);
     }

@@ -92,3 +92,19 @@ The SQL Standard defines four isolation levels
 * **Read committed** permits non repeatable reads and phantom reads.
 * **Repeatable read** permits only phantom reads.
 * **Serializable** does not permit any read errors but is slower as it is absolute Isolation.
+
+
+# Rollback
+
+Programatically handle roll back in the event of a checked exception.
+
+In case of a checked exceptions the previously executed transactions do not get rolled back automatically even if transaction annotation is used. 
+This is achieved via the RollbackFor annotation.
+
+A checked exception is a type of exception that must be either caught or declared in the method in which it is thrown
+
+Example: With Admission Service, if an invalid Hostel Exception is thrown, then the Tx prior to Hostel Tx (Student and Department) would be committed successfully, which is not desirable.
+The requirement here is to have Student, Department, Hosteladn Society Txs to be completed in its entirety or not committed at all.
+
+
+
