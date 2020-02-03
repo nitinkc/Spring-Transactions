@@ -76,6 +76,7 @@ which can only be set at the connection level (not per transaction).
 
 ## Isolation Problems
 [Isolation Eg](https://www.javainuse.com/spring/boot-transaction-isolation)
+
 [Isolation Article](https://medium.com/@elliotchance/sql-transaction-isolation-levels-explained-50d1a2f90d8f)
 
 * **Dirty Reads** : When current transaction reads a row written by another uncommitted transaction that is in progress.
