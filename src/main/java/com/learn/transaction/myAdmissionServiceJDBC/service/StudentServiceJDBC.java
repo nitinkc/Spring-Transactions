@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by nitin on Saturday, February/01/2020 at 3:39 PM
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 public class StudentServiceJDBC {
     @Autowired
     private StudentDaoImpl studentRepository;
