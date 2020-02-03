@@ -127,4 +127,3 @@ Hibernate: select department0_.student_enrolled as student_1_1_0_, department0_.
 com.learn.transaction.myAdmissionService.exception.InvalidHostelException: Boys Hostel cannot be assigned to Female Student
 	at com.learn.transaction.myAdmissionService.AdmissionService.addStudent(AdmissionService.java:42)
 ```
-

@@ -21,7 +21,7 @@ public class Society {
     @Id
     private Long studentEnrolled;
     @Enumerated(EnumType.STRING)
-    @Column(name = "society")
+    @Column(name = "society_name")
     private SOCIETY_NAME society_name;
 
 }
