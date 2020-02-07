@@ -28,6 +28,8 @@ If none exists then only a new one is created
 
 If Student Service does not have a Transactional Annotation, and Department Service has REQUIRED, then a new Tx will be created.
 
+SUPPORTS -  If current transaction exists then it continues with it. If none exists then, then gets executed with out transaction.
+
 
 MANDATORY - Always executes in a transaction. If there is any existing transaction it is used. If there is no existing transaction it will throw an exception.
 
