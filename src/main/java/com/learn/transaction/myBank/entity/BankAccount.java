@@ -1,8 +1,7 @@
 package com.learn.transaction.myBank.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
 
 /**
  * Created by nitin on Thursday, January/23/2020 at 11:08 PM

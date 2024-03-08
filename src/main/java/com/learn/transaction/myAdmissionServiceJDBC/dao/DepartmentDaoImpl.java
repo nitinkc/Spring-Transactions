@@ -1,12 +1,12 @@
 package com.learn.transaction.myAdmissionServiceJDBC.dao;
 
 import com.learn.transaction.myAdmissionService.entity.Department;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.util.Optional;
 

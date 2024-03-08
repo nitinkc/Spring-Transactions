@@ -2,7 +2,7 @@ package com.learn.transaction.myAdmissionService.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * Created by nitin on Thursday, January/23/2020 at 11:08 PM
