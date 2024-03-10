@@ -16,7 +16,6 @@ import lombok.*;
 public class BankAccount {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     private Long id;
     @Column(name = "Full_Name",nullable = false)

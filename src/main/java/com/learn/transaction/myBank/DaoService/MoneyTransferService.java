@@ -1,12 +1,10 @@
-package com.learn.transaction.myBank.transaction.DaoService;
+package com.learn.transaction.myBank.DaoService;
 
+import com.learn.transaction.exception.BankTransactionException;
 import com.learn.transaction.myBank.entity.BankAccount;
-import com.learn.transaction.myBank.exception.BankTransactionException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by nitin on Friday, January/31/2020 at 11:36 PM

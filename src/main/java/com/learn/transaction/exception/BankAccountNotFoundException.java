@@ -1,4 +1,4 @@
-package com.learn.transaction.myAdmissionService.exception;
+package com.learn.transaction.exception;
 
 /**
  * Created by nitin on Saturday, February/01/2020 at 12:46 AM
