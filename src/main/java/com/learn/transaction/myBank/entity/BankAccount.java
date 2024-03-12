@@ -23,4 +23,11 @@ public class BankAccount {
     @Column(name = "Balance",nullable = false)
     private double balance;
 
+    public void debit(double amount) {
+        this.balance -=  amount;
+    }
+
+    public void credit(double amount) {
+        this.balance +=  amount;
+    }
 }

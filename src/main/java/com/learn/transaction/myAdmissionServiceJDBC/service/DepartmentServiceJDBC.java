@@ -21,7 +21,7 @@ public class DepartmentServiceJDBC {
     }
 
     public void deleteDepartment(Department department){
-        if(!departmentRepository.findById(department.getStudentEnrolled()).isPresent()){
+        if(departmentRepository.findById(department.getStudentEnrolled()).isEmpty()){
             departmentRepository.delete(department);
         }
     }

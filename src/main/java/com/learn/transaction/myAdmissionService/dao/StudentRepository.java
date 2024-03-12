@@ -1,4 +1,4 @@
-package com.learn.transaction.myAdmissionService.daoService;
+package com.learn.transaction.myAdmissionService.dao;
 
 import com.learn.transaction.myAdmissionService.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;

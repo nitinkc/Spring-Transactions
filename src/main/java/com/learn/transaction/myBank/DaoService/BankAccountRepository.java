@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * Created by nitin on Thursday, January/23/2020 at 11:16 PM
  */
 @Repository
-public interface BankAccountDao extends JpaRepository<BankAccount,Long> {
+public interface BankAccountRepository extends JpaRepository<BankAccount,Long> {
 }

@@ -2,9 +2,11 @@ package com.learn.transaction.myBank.DaoService;
 
 import com.learn.transaction.exception.BankAccountNotFoundException;
 import com.learn.transaction.myBank.entity.BankAccount;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,21 +16,27 @@ import java.util.Optional;
  */
 @Service
 @Slf4j
+@AllArgsConstructor
 public class BankAccountService  {
-    @Autowired
-    private BankAccountDao bankAccountDao;
+    private BankAccountRepository bankAccountRepository;
 
     public List<BankAccount> listBankAccountInfo() {
-        return bankAccountDao.findAll();
+        return bankAccountRepository.findAll();
     }
 
-    public BankAccount findAccountNumber(Long id) {
+    public Optional<BankAccount> findAccountNumber(Long id) {
         log.info("Inside BankAccount findById(Long id)");
-        Optional<BankAccount> bankAccountOptional = bankAccountDao.findById(id);
-        if (!bankAccountOptional.isPresent()){
-            throw new BankAccountNotFoundException("Account No : " + id);
-        }
+        return bankAccountRepository.findById(id);
+    }
 
-        return bankAccountOptional.get();
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public BankAccount getAccountBalance(Long accountId) {
+        return bankAccountRepository.findById(accountId)
+                .orElseThrow(() -> new BankAccountNotFoundException("Account not found " + accountId));
+    }
+
+    @Transactional
+    public void updateAccountBalance(BankAccount account) {
+        bankAccountRepository.save(account);
     }
 }

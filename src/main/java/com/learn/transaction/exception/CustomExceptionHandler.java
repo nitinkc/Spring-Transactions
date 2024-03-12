@@ -18,8 +18,8 @@ import java.util.Enumeration;
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
-    //Handling 2 exception classes. Notice the parameter of handleNotFoundExceptions method (BusinessException exception)
-    @ExceptionHandler(value = {BankTransactionException.class, InvalidHostelException.class})
+    @ExceptionHandler(value = {BankTransactionException.class,
+            InvalidHostelException.class, BankAccountNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<MyExceptionResponse> handleNotFoundExceptions(Exception exception, HttpServletRequest request) throws IOException {
         MyExceptionResponse error = MyExceptionResponse.builder()

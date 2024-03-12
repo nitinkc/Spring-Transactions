@@ -23,6 +23,14 @@ public class AdmissionController {
     }
 
     private void run() {
+        Result result = getResult();
+
+        admissionService.addStudent(result.student(), result.department(), result.hostel(), result.society());
+
+       // admissionService.addStudent(result.student1(), result.department1(), result.hostel1(), result.society1());
+    }
+
+    private static Result getResult() {
         Student student = new Student(123L,"John","Doe","Male");
         Department department = new Department(123L, DEPARTMENT_NAME.COMPUTER_SCIENCE);
         Hostel hostel = new Hostel(123L, HOSTEL_NAME.GANDHI);
@@ -30,10 +38,13 @@ public class AdmissionController {
 
         Student student1 = new Student(564L,"Jane","Doe","Female");
         Department department1 = new Department(564L, DEPARTMENT_NAME.ELECTRICAL);
-        Hostel hostel1 = new Hostel(564L, HOSTEL_NAME.GANDHI);
+        Hostel hostel1 = new Hostel(564L, HOSTEL_NAME.GANDHI);//Invalid Hostel
         Society society1 = new Society(564L,SOCIETY_NAME.SPORTS);
 
-        admissionService.addStudent(student,department,hostel,society);
-        admissionService.addStudent(student1,department1,hostel1,society1);
+        return new Result(student, department, hostel, society,
+                                    student1, department1, hostel1, society1);
+    }
+
+    private record Result(Student student, Department department, Hostel hostel, Society society, Student student1, Department department1, Hostel hostel1, Society society1) {
     }
 }
