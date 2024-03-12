@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class DepartmentService {
     private DepartmentRepository departmentRepository;
 
-    @Transactional(propagation = Propagation.REQUIRED, isolation = )
+    @Transactional(propagation = Propagation.REQUIRED)
     public void saveDepartment(Department department){
         departmentRepository.save(department);
     }
